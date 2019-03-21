@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>React测试用例</title>
+		<meta charset="utf-8"/>
+		<!-- React的核心库 -->
+		<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js" type="text/javascript"></script>
+		<!-- 提供与DOM相关的功能 -->
+		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+		<!-- Babel可以将Es6代码转换为ES5的代码 -->
+		<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+		<style type="text/css">
+			.test{
+				border :2px solid purple;
+			}
+			h3,h4{
+				color:#00a0e9;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="test">
+			<h3>React元素渲染</h3>
+			<h4>简单的元素渲染</h4>
+			<div id="example"></div>
+			<div id="test1"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React JSX</h3>
+			<div id="operation"></div>
+			<div id="condition"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React 组件和道具</h3>
+			<div id="accembly"></div>
+			<div id="composite"></div>
+		</div>
+		<script type="text/babel">
+			{/**开始元素渲染处理**/}
+			const elemet = <h3>hello world</h3>;
+			ReactDOM.render(
+				elemet,
+				document.getElementById("example")
+			)
+			function times(){
+				const test1 = (
+					<h4>当前时间为:{new Date().toLocaleTimeString()}</h4>
+				);
+				ReactDOM.render(
+					test1,
+					document.getElementById("test1")
+				)
+			}
+			setInterval(times,1000)
+			{/**结束元素渲染处理**/}
+			{/**开始JSX处理**/}
+				var i = 1209;
+				var  arr = [
+					<h3>数组1</h3>,
+					<h4>数组2</h4>,
+				];
+				ReactDOM.render(
+					<div>
+						<h3>JSX中的运算值为:{2 * 4}</h3>
+						<h3>JSX中运算符的判断:{ i == 1209 ? 'True':'False'}</h3>
+					</div>,
+					document.getElementById("operation")
+				)
+				ReactDOM.render(
+					<div>数组的处理:{arr}</div>,
+					document.getElementById("condition")
+				)
+			{/**结束JSX处理**/}
+			{/**开始组件处理**/}
+				{/**简单组件处理**/}
+				function HelloMessage(props){
+					return <h3>hello {props.name}</h3>
+				}
+				{/**为用户自定义的组件**/}
+				const hellos = <HelloMessage name="ye1209mx"/> 
+				ReactDOM.render(
+					hellos,
+					document.getElementById("accembly")
+				)
+				function Name(props){
+					return <h4>复合组件1:{props.name}</h4>
+				}
+				function Url(props){
+					return <h4>复合组件2:{props.url}</h4>
+				}
+				function Asd(){
+					return (<div>
+						<Name name="晨曦"/>
+						<Url url="www.baidu.com"/>
+					</div>);
+				}
+				ReactDOM.render(
+					<Asd/>,
+					document.getElementById("composite")
+				)
+			{/**结束组件处理**/}
+		</script>
+	</body>
+</html>
