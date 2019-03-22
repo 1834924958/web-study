@@ -9,6 +9,8 @@
 		<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
 		<!-- Babel可以将Es6代码转换为ES5的代码 -->
 		<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+		<!-- props验证-->
+		<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
 		<style type="text/css">
 			.test{
 				border :2px solid purple;
@@ -36,6 +38,23 @@
 			<h3>React 组件和道具</h3>
 			<div id="accembly"></div>
 			<div id="composite"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React State状态</h3>
+			<div id="states"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React Props(属性)</h3>
+			<div id="Props"></div>
+			<div id="Props1"></div>
+			<div id="Props2"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React 事件</h3>
+			<div id="events"></div>
 		</div>
 		<script type="text/babel">
 			{/**开始元素渲染处理**/}
@@ -101,6 +120,89 @@
 					document.getElementById("composite")
 				)
 			{/**结束组件处理**/}
+			{/**开始State处理**/}
+			function Formatte(props){
+				return <h4>现在的时间是:{props.date.toLocaleTimeString()}</h4>
+			}
+			class Clock extends React.Component{
+				constructor(props){
+					super(props);
+					this.state = {date:new Date()};
+				}
+				componentDidMount(){
+					this.timerID = setInterval(
+						() => this.tick(),
+						1000
+					);
+				}
+				componentWillUnmount(){
+					clearInterval(this.timerID);
+				}
+				tick(){
+					this.setState({
+						date:new Date()
+					});
+				}
+				render (){
+					return (
+						<div>
+							<Formatte date={this.state.date}/>
+						</div>
+					);
+				}
+			}
+			function Apps(){
+				return (
+					<div>
+						<Clock />
+						<Clock />
+					</div>
+				);
+			}
+			ReactDOM.render(<Apps/>,document.getElementById("states"))
+			{/**结束State处理**/}
+			{/**开始Props处理**/}
+				{/**执行简单的Props处理**/}
+				function Hellops(props) {
+					return <h3>简单的测试:{props.name}</h3>;
+				}
+				const propsd = <Hellops name="123"/>;
+				ReactDOM.render(
+					propsd,
+					document.getElementById("Props")
+				);
+				{/***默认的props**/}
+				class Hellops1 extends React.Component{
+					render(){
+						return (
+							<h4>Props默认值测试:{this.props.title}</h4>
+						);
+					}
+				}
+				Hellops1.defaultProps = {
+					title: "defaultProps"
+				}
+				const he1 = <Hellops1/>;
+				ReactDOM.render(
+					he1,
+					document.getElementById("Props1")
+				)
+				{/***props验证**/}
+				var  titles = 123
+				{/***var  titles = "晨曦"***/}
+				class MyTitle extends React.Component{
+					render(){
+						return (<h4>Props验证的操作:{this.props.titles}</h4>);
+					}
+				}
+				MyTitle.propTypes = {
+					titles:PropTypes.number
+				}
+				ReactDOM.render(
+					<MyTitle titles={titles}/>,
+					document.getElementById("Props2")
+				);
+			{/**结束Props处理**/}
 		</script>
 	</body>
 </html>
