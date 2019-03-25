@@ -56,6 +56,18 @@
 			<h3>React 事件</h3>
 			<div id="events"></div>
 		</div>
+		<br/>
+		<div class="test">
+			<h3>React 条件渲染</h3>
+			<div id="conditions1"></div>
+			<div id="conditions2"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React 列表 & Keys</h3>
+			<div id="list1"></div>
+			<div id="list2"></div>
+		</div>
 		<script type="text/babel">
 			{/**开始元素渲染处理**/}
 			const elemet = <h3>hello world</h3>;
@@ -203,6 +215,138 @@
 					document.getElementById("Props2")
 				);
 			{/**结束Props处理**/}
+			{/**开始事件的处理**/}
+				class Events1 extends React.Component{
+					constructor(props){
+						super(props);
+						this.state = {isToggleOn:true};
+						this.handleClick = this.handleClick.bind(this);
+					}
+					handleClick(){
+						this.setState(prevState => ({
+							isToggleOn: !prevState.isToggleOn
+						}));
+					}
+					render(){
+						return(
+							<button onClick={this.handleClick}>
+								{this.state.isToggleOn ? "ON" : "OFF"}
+							</button>
+						);
+					}
+				}
+				ReactDOM.render(
+					<Events1 />,
+					document.getElementById("events")
+				)
+			{/**结束事件的处理**/}
+			{/**开始条件渲染的处理**/}
+				{/**简单的执行条件渲染**/}
+				function  Condi1(props){
+					return <h3>符合条件1</h3>;
+				}
+				function  Condi2(props){
+					return <h3>符合条件2</h3>;
+				}
+				function Greeting1(props){
+					const isconditions = props.isconditions;
+					if(isconditions){
+						return <Condi1 />;
+					}else{
+						return <Condi2 />;
+					}
+				}
+				ReactDOM.render(
+					<Greeting1 isconditions={true} />,
+					document.getElementById("conditions1")
+				);
+				{/**其他的执行条件渲染**/}
+				class Conditi1 extends React.Component{
+					constructor(props){
+						super(props);
+						this.handCon1 = this.handCon1.bind(this);
+						this.handCon2 = this.handCon2.bind(this);
+						this.state = {isCond:false};
+					}
+					handCon1(){
+						this.setState({isCond:true});
+					}
+					handCon2(){
+						this.setState({isCond:false});
+					}
+					render(){
+						const isCond = this.state.isCond;
+						let button;
+						if(isCond){
+							button = <Condis1 onClick={this.handCon2}/>;
+						}else{
+							button = <Condis2 onClick={this.handCon1}/>;
+						}
+						return(
+							<div>
+								<Greeting3 isCond={isCond}/>
+								{button}
+							</div>
+						);
+					}
+				}
+				function Condi3(props){
+					return <h4>我是条件1</h4>;
+				}
+				function Condi4(props){
+					return <h4>我是条件2</h4>;
+				}
+				function Greeting3(props)
+				{
+					const isCond = props.isCond;
+					if(isCond){
+						return <Condi3 />;
+					}else{
+						return <Condi4 />;
+					}
+				}
+				function Condis1(props){
+					return (<button onClick="{props.onClick}">11</button>);
+				}
+				function Condis2(props){
+					return (<button onClick="{props.onClick}">22</button>);
+				}
+				ReactDOM.render(
+					<Conditi1 />,
+					document.getElementById("conditions2")
+				);
+			{/**结束条件渲染的处理**/}
+				{/**开始列表的处理**/}
+				const numbers = [1,2,3,4];
+				const listItems = numbers.map((numbers) => <li>{numbers}</li>);
+				ReactDOM.render(
+					<ul>{listItems}</ul>,
+					document.getElementById("list1")
+				);	
+				{/**key值得处理**/}
+				function ListItem(props) {
+				  return <li>{props.value}</li>;
+				}
+
+				function NumberList(props) {
+				  const asd = props.asd;
+				  const listItems = asd.map((number) =>
+				    <ListItem key={number.toString()}
+				              value={number} />
+				  );
+				  return (
+				    <ul>
+				      {listItems}
+				    </ul>
+				  );
+				}
+
+				const asd = [6,7,8,9,10];
+				ReactDOM.render(
+				  <NumberList asd ={asd} />,
+				  document.getElementById('list2')
+				);
+			{/**结束列表的处理**/}
 		</script>
 	</body>
 </html>
