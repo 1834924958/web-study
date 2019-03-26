@@ -68,6 +68,16 @@
 			<div id="list1"></div>
 			<div id="list2"></div>
 		</div>
+		<br/>
+		<div class="test">
+			<h3>React 组件 API</h3>
+			<div id="assembly1"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React 组件生命周期</h3>
+			<div id="lifecycle1"></div>
+		</div>
 		<script type="text/babel">
 			{/**开始元素渲染处理**/}
 			const elemet = <h3>hello world</h3>;
@@ -347,6 +357,53 @@
 				  document.getElementById('list2')
 				);
 			{/**结束列表的处理**/}
+			{/**开始组件API的处理**/}
+				class Counter extends React.Component{
+					constructor(props){
+						super(props);
+						this.state = {clickCount:0};
+						this.handleClick = this.handleClick.bind(this);
+					}
+					handleClick(){
+						this.setState(function(state){
+							return {clickCount:state.clickCount + 1};
+						});
+					}
+					render(){
+						return (<h4 onClick={this.handleClick}>请点击，次数为:{this.state.clickCount}</h4>);
+					}
+				}
+				ReactDOM.render(
+					<Counter />,
+					document.getElementById("assembly1")
+				);
+			{/**结束组件API的处理**/}
+			{/**开始组件生命周期的处理**/}
+				{/**简单的组件生命周期处理**/}
+				class Hellos1 extends React.Component{
+					constructor(props){
+						super(props);
+						this.state = {opacity:1.0};
+					}
+					componentDidMount(){
+						this.timer = setInterval(function(){
+							var opacity = this.state.opacity;
+							opacity -= .05;
+							if(opacity < 0.1){
+								opacity = 1.0;
+							}
+							this.setState({opacity:opacity});
+						}.bind(this),100);
+					}
+					render(){
+						return (<div style={{opacity:this.state.opacity}}>Hello {this.props.name}</div>);
+					}
+				}
+				ReactDOM.render(
+					<Hellos1 name="叶子"/>,
+					document.getElementById("lifecycle1")
+				);
+			{/**结束组件生命周期的处理**/}
 		</script>
 	</body>
 </html>
