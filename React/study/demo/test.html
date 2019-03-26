@@ -78,6 +78,16 @@
 			<h3>React 组件生命周期</h3>
 			<div id="lifecycle1"></div>
 		</div>
+		<br/>
+		<div class="test">
+			<h3>React Refs</h3>
+			<div id="refs1"></div>
+		</div>
+		<br/>
+		<div class="test">
+			<h3>React 表单与事件</h3>
+			<div id="table1"></div>
+		</div>
 		<script type="text/babel">
 			{/**开始元素渲染处理**/}
 			const elemet = <h3>hello world</h3>;
@@ -404,6 +414,56 @@
 					document.getElementById("lifecycle1")
 				);
 			{/**结束组件生命周期的处理**/}
+			{/**开始React中Refs的处理**/}
+				class MyComponent extends React.Component{
+					handleClick(){
+						this.refs.myInput.focus();
+					}
+					render(){
+						return(
+							<div>
+								<input type="text" ref="myInput"/>
+								<input type="button" value="点击获取输入框焦点" onClick={this.handleClick.bind(this)}/>
+							</div>
+						);
+					}
+				}
+				ReactDOM.render(
+					<MyComponent />,
+					document.getElementById("refs1")
+				);
+			{/**结束React中Refs的处理**/}
+			{/**开始React中表单与事件的处理**/}
+				class Content extends React.Component{
+					render(){
+						return	<div>
+									<input type="text" value={this.props.myDataProp} onChange={this.props.updateStateProp}/>
+									<h4>{this.props.myDataProp}</h4>
+						  		</div>;
+					}
+				}
+				class HelloMessage1 extends React.Component{
+					constructor(props){
+						super(props);
+						this.state = {value:'晨曦'};
+						this.handleChange = this.handleChange.bind(this);
+					}
+					handleChange(event){
+						this.setState({value:event.target.value});
+					}
+					render() {
+					    var value = this.state.value;
+					    return <div>
+					            <Content myDataProp = {value} 
+					              updateStateProp = {this.handleChange}></Content>
+					           </div>;
+					  }
+				}
+				ReactDOM.render(
+					<HelloMessage1 />, 
+					document.getElementById("table1")
+				);
+			{/**结束React中表单与事件的处理**/}
 		</script>
 	</body>
 </html>
