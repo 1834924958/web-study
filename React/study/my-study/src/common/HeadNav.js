@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import {Menu,Icon} from 'antd';
+import {Link} from 'react-router-dom';
 import '../styles/common/HeadNav.css';
 export default class HeadNav extends Component {
 	state = {
@@ -13,10 +14,16 @@ export default class HeadNav extends Component {
 						<Icon type="global" className="nav-logo"/>
 					</div>
 					<div className="nav-list-wrap">
-						<Menu selectedKeys={[this.state.current]} mode="horizontal">
-						<Menu.Item key="home">首页</Menu.Item>
-						<Menu.Item key="aboutme">关于我</Menu.Item>
-						<Menu.Item key="resource">资源</Menu.Item>
+						<Menu selectedKeys={[this.state.current]} mode="horizontal"  onClick={this.handleClick}>
+						<Menu.Item key="home">
+							<Link to="/">首页</Link>
+						</Menu.Item>
+						<Menu.Item key="aboutme">
+							<Link to="/home">关于我</Link>
+						</Menu.Item>
+						<Menu.Item key="resource">
+							<Link to="/resource">资源</Link>
+						</Menu.Item>
 						</Menu>
 					</div>
 				</div>
