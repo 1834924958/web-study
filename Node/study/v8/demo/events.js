@@ -44,3 +44,7 @@ eventEmitter.emit('connection');
 eventListeners = eventEmitter.listenerCount('connection');
 console.log(eventListeners + "个监听器监听链接事件。")
 console.log('程序执行完成');
+////4.error事件
+// var events = require('events');
+// var emitter = new events.EventEmitter();
+// emitter.emit('error');
