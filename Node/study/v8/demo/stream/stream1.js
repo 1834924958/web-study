@@ -3,7 +3,7 @@ var fs = require('fs');
 var data = '写入流的操作demo';
 
 //创建一个可以写入的流
-var writerStream = fs.createWriteStream('output.txt');
+var writerStream = fs.createWriteStream('../public/output.txt');
 
 //utf8进行编程
 writerStream.write(data,'UTF8');

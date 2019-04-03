@@ -6,7 +6,7 @@ var fs = require("fs");
 // console.log("程序执行结束-阻塞");
 
 ////2.非阻塞代码demo
-fs.readFile("input.txt",function(err,data){
+fs.readFile("../public/input.txt",function(err,data){
 	if(err) return console.log(err);
 	console.log(data.toString());
 });

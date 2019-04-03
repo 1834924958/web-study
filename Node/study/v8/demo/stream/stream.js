@@ -3,7 +3,7 @@ var fs = require("fs");
 var data = '';
 
 //创建可读的流
-var readerStream = fs.createReadStream('input.txt');
+var readerStream = fs.createReadStream('../public/input.txt');
 //设置编码
 readerStream.setEncoding('UTF8');
 //处理流事件
