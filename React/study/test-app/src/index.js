@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import router from './router';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const ICE_ROOT = document.getElementById("root");
+if(!ICE_ROOT){
+	throw new Error("当前页面不存在");
+}
+ReactDOM.render(router,ICE_ROOT);
